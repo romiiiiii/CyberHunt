@@ -13,8 +13,8 @@ export default function CafeteriaPlaceholder() {
     >
       <defs>
         <linearGradient id="caf-outside" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#f6c79a" />
-          <stop offset="1" stopColor="#f29b7a" />
+          <stop offset="0" stopColor="#aebccb" />
+          <stop offset="1" stopColor="#d6dbd6" />
         </linearGradient>
       </defs>
 
@@ -23,13 +23,20 @@ export default function CafeteriaPlaceholder() {
       <rect y="205" width="400" height="95" fill="#c99a6e" />
       <rect y="205" width="400" height="5" fill="#b5875c" />
 
-      {/* Arched windows with sunset outside */}
+      {/* Arched windows: a rainy morning and umbrella pines outside */}
       {[40, 130, 220].map((x) => (
         <g key={x}>
           <path d={`M${x} 150 V70 a35 35 0 0 1 70 0 V150 Z`} fill="url(#caf-outside)" />
           <path d={`M${x} 150 V70 a35 35 0 0 1 70 0 V150 Z`} fill="none" stroke="#fff6e6" strokeWidth="5" />
           <line x1={x + 35} y1="36" x2={x + 35} y2="150" stroke="#fff6e6" strokeWidth="3" />
-          <path d={`M${x} 140 Q${x + 25} 120 ${x + 70} 132 V150 H${x} Z`} fill="#7d9f78" opacity="0.8" />
+          <path d={`M${x} 140 Q${x + 25} 120 ${x + 70} 132 V150 H${x} Z`} fill="#5f8565" />
+          <ellipse cx={x + 22} cy="122" rx="20" ry="5" fill="#2f5a45" />
+          <line x1={x + 22} y1="122" x2={x + 24} y2="140" stroke="#6b5444" strokeWidth="2" />
+          <g stroke="#ffffff" strokeOpacity="0.6" strokeWidth="1" strokeLinecap="round">
+            {[10, 24, 40, 56].map((dx, i) => (
+              <line key={dx} x1={x + dx} y1={70 + i * 12} x2={x + dx - 2} y2={78 + i * 12} />
+            ))}
+          </g>
         </g>
       ))}
 
@@ -66,6 +73,8 @@ export default function CafeteriaPlaceholder() {
       <path d="M70 226 L76 206 H104 L98 226 Z" fill="#8fb3d9" />
       <rect x="64" y="225" width="44" height="4" rx="2" fill="#6d8fb3" />
       <rect x="116" y="220" width="10" height="10" rx="2" fill="#fff6e6" />
+      {/* An instant 3-in-1 coffee sachet: completely harmless, every campus has them */}
+      <rect x="128" y="226" width="14" height="3" rx="1" fill="#c4372f" transform="rotate(-12 135 227)" />
 
       {/* Backpack leaning on the second table */}
       <rect x="262" y="250" width="22" height="28" rx="7" fill="#c8457a" />
