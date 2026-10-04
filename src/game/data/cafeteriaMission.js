@@ -267,7 +267,8 @@ export const cafeteriaMission = {
     The exit door's three locks. The player sees all three from the start.
     - kind 'choice': pick one of the given options.
     - kind 'note':   pick one of YOUR notes as proof. You can only answer
-                     if you've actually found the right note.
+                     if you've actually found the right note; if you haven't,
+                     a wrong pick shows `missing` to point you back to the café.
   */
   exitLocks: [
     {
@@ -288,6 +289,8 @@ export const cafeteriaMission = {
       question: 'Where is that network coming from? Pick the note that proves it.',
       answer: 'hidden-device',
       wrong: 'That doesn’t show where the signal comes from. Something close by must be broadcasting it.',
+      // Shown instead of `wrong` when the player hasn't found the right note at all yet.
+      missing: 'None of your notes show where it’s coming from yet. A strong signal means it’s close — someone mentioned where her friend was sitting.',
       solved: 'A hidden box under table 7 is broadcasting it — that’s why its signal is so strong.',
     },
     {
@@ -296,6 +299,7 @@ export const cafeteriaMission = {
       question: 'How did it take over Maya’s account? Pick the note that proves it.',
       answer: 'maya-login',
       wrong: 'That doesn’t explain how her password got out. What happened right after she connected?',
+      missing: 'None of your notes explain this yet. Maya was there when it happened — ask her what happened after she connected.',
       solved: 'A fake login page asked for her university password, and someone used it.',
     },
   ],
