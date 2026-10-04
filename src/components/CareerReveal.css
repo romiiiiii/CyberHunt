@@ -1,0 +1,86 @@
+.reveal {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1rem calc(2rem + env(safe-area-inset-bottom));
+  background:
+    radial-gradient(circle at 15% 10%, rgba(255, 217, 138, 0.6), transparent 40%),
+    #e9d9bd;
+}
+
+/* The three cards appear one after another: escape → term → field. */
+.reveal__card {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.5rem 1.4rem;
+  border-radius: 24px;
+  background: var(--limestone);
+  box-shadow: 0 8px 0 rgba(35, 57, 47, 0.14);
+  animation: reveal-in 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+.reveal__card:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.reveal__card:nth-child(3) {
+  animation-delay: 1s;
+}
+
+@keyframes reveal-in {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+}
+
+.reveal__card--escape {
+  background: var(--cedar);
+  color: var(--limestone);
+}
+
+.reveal__card--field {
+  border: 3px solid var(--apricot);
+}
+
+.reveal__kicker {
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--mystery);
+}
+
+.reveal__card--escape .reveal__kicker {
+  color: var(--apricot);
+}
+
+.reveal__headline {
+  font-size: clamp(1.7rem, 7vw, 2.3rem);
+}
+
+.reveal__term {
+  font-size: clamp(1.8rem, 8vw, 2.5rem);
+}
+
+.reveal__lead {
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.reveal__duties {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.reveal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  animation: reveal-in 0.6s 1.4s both;
+}
