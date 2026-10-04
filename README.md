@@ -239,13 +239,20 @@ Then open the address Vite prints (usually http://localhost:5173). To test on yo
 src/
   main.jsx              entry point (sets up the router)
   App.jsx               the list of screens and their URLs
-  styles/global.css     colours, fonts and shared button styles
+  styles/global.css     colours, fonts and shared styles
   pages/                one file per screen (landing, campus, cafeteria mission)
-  components/           reusable pieces (campus illustration, location card, mission header...)
-  game/data/            game content — locations and mission story text, kept out of the UI
-  game/scenes/          scene illustrations (the cafeteria is a placeholder for now)
+  components/           reusable pieces: GameScene, Hotspot, Sheet, DialogueBox,
+                        PhoneWifi, CluePanel, Toast, FinalQuestion, CareerReveal...
+  game/data/            game content: locations and all Mission 01 text, clues and puzzle
+  game/scenes/          scene illustrations (cafeteria views are hand-drawn SVG placeholders)
+  game/useMission.js    tracks clues found and objects checked during a mission
 ```
+
+To change the mystery (dialogue, network names, which clues are required), edit
+`src/game/data/cafeteriaMission.js` — no component code needs to change.
 
 ### Current status
 
-Milestone 1: landing screen → campus path → Mission 01 intro → cafeteria **placeholder** scene. The investigation itself (hotspots, dialogue, clues, Wi-Fi puzzle, career reveal) is not built yet.
+- Landing screen → campus path → Mission 01 intro.
+- **Mission 01 is playable:** three cafeteria views (counter, seating area, exit), clickable objects (some useful, some harmless), Maya's dialogue, the phone's Wi-Fi list, clues, hints, the final question at the exit, and the Network Security career reveal.
+- Not built yet: the corridor with mock students, the Cyber Profile, saving progress (refreshing restarts the mission), and final illustrated art (current art is placeholder SVG).
