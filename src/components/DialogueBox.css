@@ -1,0 +1,75 @@
+/* Sits over the bottom of the scene, so the character stays visible above it. */
+.dialogue-layer {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  padding: 0 0.75rem calc(0.75rem + env(safe-area-inset-bottom));
+}
+
+.dialogue {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  padding: 1.6rem 1.25rem 1.1rem;
+  border-radius: 22px;
+  background: var(--limestone);
+  border: 3px solid var(--cedar);
+  box-shadow: 0 6px 0 rgba(35, 57, 47, 0.25);
+  animation: sheet-up 0.25s ease both;
+}
+
+/* Name tag sticking out of the top edge, like a visual novel. */
+.dialogue__speaker {
+  position: absolute;
+  top: -1rem;
+  left: 1rem;
+  padding: 0.2rem 0.9rem;
+  border-radius: var(--radius-pill);
+  background: var(--apricot);
+  font-weight: 800;
+  box-shadow: 0 3px 0 var(--apricot-deep);
+}
+
+.dialogue__line {
+  font-size: 1.05rem;
+  min-height: 3em;
+}
+
+.dialogue__choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.dialogue__choice {
+  min-height: var(--tap);
+  padding: 0.6rem 1rem;
+  border: 2px solid #d9c7a6;
+  border-radius: 14px;
+  background: #fffaf0;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.dialogue__choice:hover {
+  border-color: var(--apricot);
+}
+
+.dialogue__choice--asked {
+  color: var(--cedar-soft);
+  background: transparent;
+}
+
+.dialogue__choice--asked::after {
+  content: ' ✓';
+}
+
+.dialogue__choice--leave {
+  border-style: dashed;
+  background: transparent;
+  color: var(--cedar-soft);
+}
