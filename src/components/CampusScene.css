@@ -45,20 +45,6 @@
   64%, 72% { opacity: 0.25; }
 }
 
-/* Students bob gently, as if walking. */
-.scene-student {
-  animation: bob 1.6s ease-in-out infinite;
-}
-
-@keyframes bob {
-  50% { transform: translateY(-1.5px); }
-}
-
-/* The late student bounces faster. */
-.scene-student--running {
-  animation-duration: 0.45s;
-}
-
 .scene-rain line {
   animation: rain-fall 0.9s linear infinite;
 }

@@ -1,0 +1,193 @@
+.scene {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  /* Wall above, floor below: whatever the picture doesn't cover looks like more room. */
+  background: linear-gradient(#f0dcbc 50%, #c99a6e 50%);
+}
+
+.scene__viewport {
+  height: 100%;
+  display: flex;
+  container-type: size; /* lets the picture size itself from this box (cqw/cqh units) */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+.scene__viewport::-webkit-scrollbar {
+  display: none;
+}
+
+/*
+  The picture is as big as the screen height allows, but never more than
+  1.6× the screen width — so on a phone you see most of the room and
+  only swipe a little. margin: auto centres it both ways.
+*/
+.scene__canvas {
+  display: block;
+  flex: 0 0 auto;
+  width: min(160cqw, 133.33cqh);
+  aspect-ratio: 4 / 3;
+  margin: auto;
+}
+
+/* Where am I? */
+.scene__place {
+  position: absolute;
+  top: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.3rem 0.85rem;
+  border-radius: var(--radius-pill);
+  background: rgba(244, 236, 221, 0.92);
+  font-weight: 800;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.scene__step {
+  margin-left: 0.3rem;
+  font-weight: 700;
+  color: var(--cedar-soft);
+}
+
+.scene__swipe {
+  position: absolute;
+  top: 3.1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.25rem 0.7rem;
+  border-radius: var(--radius-pill);
+  background: rgba(35, 57, 47, 0.75);
+  color: var(--limestone);
+  font-size: 0.8rem;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+/* Arrows to the neighbouring views, pinned to the middle of the screen edges. */
+.scene__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  min-width: var(--tap);
+  padding: 0.5rem 0.4rem;
+  border: none;
+  border-radius: 18px;
+  background: rgba(244, 236, 221, 0.95);
+  font-size: 0.75rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 0 rgba(35, 57, 47, 0.2);
+}
+
+.scene__nav span {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.scene__nav--prev {
+  left: 0.5rem;
+}
+
+.scene__nav--next {
+  right: 0.5rem;
+}
+
+/* Tall screens (phones): the picture leaves an empty strip at the bottom,
+   so the arrows go there and never cover something clickable. */
+@media (max-aspect-ratio: 1/1) {
+  .scene__nav {
+    top: auto;
+    bottom: 0.75rem;
+    transform: none;
+    flex-direction: row;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* ---------- Hotspots (inside the SVG) ---------- */
+
+.hotspot {
+  cursor: pointer;
+  outline: none;
+}
+
+.hotspot__hit {
+  fill: transparent;
+}
+
+.hotspot__ring {
+  fill: rgba(255, 255, 255, 0.35);
+  stroke: #ffffff;
+  stroke-width: 2;
+}
+
+.hotspot__dot {
+  fill: #ffffff;
+}
+
+.hotspot__halo {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hotspot-pulse 2.2s ease-out infinite;
+}
+
+@keyframes hotspot-pulse {
+  from { transform: scale(0.8); opacity: 0.9; }
+  to { transform: scale(2); opacity: 0; }
+}
+
+.hotspot:hover .hotspot__ring,
+.hotspot:focus-visible .hotspot__ring {
+  stroke: var(--mystery);
+  stroke-width: 3;
+}
+
+/* Already checked: quieter, no pulse. */
+.hotspot--visited .hotspot__halo {
+  display: none;
+}
+
+.hotspot--visited .hotspot__ring {
+  fill: rgba(35, 57, 47, 0.25);
+  stroke-opacity: 0.6;
+}
+
+/* ---------- Small scene animations ---------- */
+
+.scene-blink {
+  fill: var(--mystery);
+  animation: blink 0.7s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.scene-shake {
+  animation: shake 0.25s linear infinite;
+}
+
+@keyframes shake {
+  50% { transform: translate(0.6px, -0.4px); }
+}
+
+.exit-door {
+  fill: #7fc1c4;
+  transition: fill 0.6s ease;
+}
+
+.exit-door--open {
+  fill: #f6f0d8;
+}

@@ -121,6 +121,31 @@ button {
   background: rgba(244, 236, 221, 0.85);
 }
 
+/* Text for screen readers only. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Shared by every illustrated scene. */
+/* Students bob gently, as if walking. */
+.scene-student {
+  animation: bob 1.6s ease-in-out infinite;
+}
+
+@keyframes bob {
+  50% { transform: translateY(-1.5px); }
+}
+
+/* The late student bounces faster. */
+.scene-student--running {
+  animation-duration: 0.45s;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
