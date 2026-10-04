@@ -1,7 +1,7 @@
 import { CafeWalls, Plant } from './scenery.jsx';
 
 /* View 3: the exit, with the glass door, the parking lot outside, and a late student. */
-export default function ExitView({ doorOpen = false }) {
+export default function ExitView({ doorOpen = false, locksOpen = 0 }) {
   return (
     <g>
       <CafeWalls floorY={236} />
@@ -14,8 +14,8 @@ export default function ExitView({ doorOpen = false }) {
           <line x1="40" y1="160" x2="52" y2="160" />
           <line x1="96" y1="160" x2="108" y2="160" />
         </g>
-        {/* The loud car, with a little shake */}
-        <g className="scene-shake">
+        {/* The loud car, rattling a little */}
+        <g className="scene-rattle">
           <path d="M50 140 L58 128 H84 L94 140 Z" fill="#c4473d" />
           <rect x="46" y="138" width="54" height="10" rx="3" fill="#c4473d" />
           <path d="M60 138 L64 131 H76 V138 Z M80 138 V131 H84 L90 138 Z" fill="#cfe0e8" />
@@ -46,7 +46,13 @@ export default function ExitView({ doorOpen = false }) {
       <rect x="192" y="170" width="3" height="16" rx="1" fill="#e8f1ef" />
       <rect x="205" y="170" width="3" height="16" rx="1" fill="#e8f1ef" />
 
-      <Plant x={262} y={214} />
+      {/* Lock panel beside the door: one light per lock, green when open. */}
+      <rect x="244" y="138" width="14" height="40" rx="3" fill="#4a5863" />
+      {[0, 1, 2].map((i) => (
+        <circle key={i} cx="251" cy={146 + i * 12} r="3.5" fill={i < locksOpen ? '#5cc47a' : '#d9534a'} />
+      ))}
+
+      <Plant x={272} y={214} />
 
       {/* Late student rushing in with a dripping umbrella */}
       <g transform="translate(312 230)">

@@ -45,7 +45,7 @@ export default function CounterView() {
       </g>
 
       <Plant x={250} y={186} />
-      <Table x={110} y={240} rx={56} />
+      <Table x={110} y={240} rx={56} number={1} />
       <rect x="100" y="226" width="10" height="11" rx="2" fill="#fff6e6" />
     </g>
   );

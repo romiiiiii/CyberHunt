@@ -39,12 +39,21 @@ export function CafeWalls({ floorY = 205 }) {
   );
 }
 
-export function Table({ x, y, rx = 50 }) {
+// A café table. `number` adds a little numbered card on top (players can use it as a clue).
+export function Table({ x, y, rx = 50, number }) {
   return (
     <g>
       <rect x={x - 4} y={y} width="8" height={300 - y} fill="#6e4532" />
       <ellipse cx={x} cy={y} rx={rx} ry="13" fill="#8a5a3f" />
       <ellipse cx={x} cy={y - 2} rx={rx} ry="11" fill="#e9c9a0" />
+      {number && (
+        <g transform={`translate(${x + rx * 0.55} ${y - 6})`}>
+          <path d="M-6 4 L-4 -8 H4 L6 4 Z" fill="#fffaf0" stroke="#c8b08a" strokeWidth="0.8" />
+          <text y="1.5" textAnchor="middle" fontSize="8" fontWeight="800" fill="#33463c" fontFamily="Nunito, sans-serif">
+            {number}
+          </text>
+        </g>
+      )}
     </g>
   );
 }
