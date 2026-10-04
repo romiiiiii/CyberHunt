@@ -5,23 +5,26 @@
 }
 
 .scene-window {
-  fill: #5d6f7a;
+  fill: #8c9aa1;
 }
 
+/* Lights on inside — it's a dark, rainy morning. */
 .scene-window--lit {
   fill: #ffd98a;
 }
 
-.scene-cedar path:first-of-type {
-  fill: #2f5a45;
+/* Tall arched glass, tinted the blue-green of the real campus windows. */
+.scene-glass {
+  fill: #7fc1c4;
 }
 
-/* The suspicious window glows pink and flickers irregularly. */
-.scene-window--odd {
-  fill: #f2c4d6;
-  animation: odd-flicker 4s infinite steps(1);
+.scene-lamp {
+  fill: #fff2cf;
+  stroke: #c9c3b6;
+  stroke-width: 0.8;
 }
 
+/* The suspicious signal glows pink and flickers irregularly. */
 .scene-signal path {
   fill: none;
   stroke: var(--mystery);
@@ -49,4 +52,25 @@
 
 @keyframes bob {
   50% { transform: translateY(-1.5px); }
+}
+
+/* The late student bounces faster. */
+.scene-student--running {
+  animation-duration: 0.45s;
+}
+
+.scene-rain line {
+  animation: rain-fall 0.9s linear infinite;
+}
+
+@keyframes rain-fall {
+  from { transform: translate(0, -20px); opacity: 0; }
+  20% { opacity: 1; }
+  to { transform: translate(-6px, 20px); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-rain {
+    display: none;
+  }
 }
