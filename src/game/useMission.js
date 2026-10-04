@@ -1,39 +1,39 @@
 import { useState } from 'react';
 
 /*
-  Everything the player has discovered during one mission.
+  Everything the player has noticed during one mission.
+
+  Every object they check adds a neutral note. The game secretly knows
+  which notes are needed to solve the mystery (`mission.requiredNotes`),
+  but never tells the player.
 
   It lives in React state only, so refreshing the page starts over.
   When accounts are added later, this is the place to load and save progress.
 */
 export function useMission(mission) {
-  const [foundClues, setFoundClues] = useState([]); // clue ids, in the order found
-  const [visited, setVisited] = useState([]);       // hotspot ids the player has opened
-  const [toast, setToast] = useState(null);         // the "Clue found" banner currently showing
+  const [notes, setNotes] = useState([]);       // note ids, in the order noticed
+  const [visited, setVisited] = useState([]);   // hotspot ids the player has opened
+  const [toast, setToast] = useState(null);     // the "Added to your notes" banner
 
-  function findClue(clueId) {
-    if (!clueId || foundClues.includes(clueId)) return;
-    const clue = mission.clues[clueId];
-    setFoundClues([...foundClues, clueId]);
-    setToast({ id: clueId, kind: clue.kind ?? 'clue', text: clue.text });
+  function addNote(noteId) {
+    if (!noteId || notes.includes(noteId)) return;
+    setNotes([...notes, noteId]);
+    setToast({ id: noteId, text: mission.notes[noteId].text });
   }
 
   function markVisited(hotspotId) {
     if (!visited.includes(hotspotId)) setVisited([...visited, hotspotId]);
   }
 
-  const requiredFound = mission.requiredClues.filter((id) => foundClues.includes(id)).length;
-
   return {
-    foundClues,
+    notes,
     visited,
     toast,
     clearToast: () => setToast(null),
-    findClue,
+    addNote,
     markVisited,
-    requiredFound,
-    readyToSolve: requiredFound === mission.requiredClues.length,
-    // The first hint whose clue the player hasn't found yet.
-    nextHint: mission.hints.find((hint) => !foundClues.includes(hint.clue)),
+    readyToSolve: mission.requiredNotes.every((id) => notes.includes(id)),
+    // The first hint whose note the player hasn't found yet.
+    nextHint: mission.hints.find((hint) => !notes.includes(hint.note)),
   };
 }

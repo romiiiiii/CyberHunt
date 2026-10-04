@@ -2,7 +2,7 @@
   All content for Mission 01 — Escape the Cafeteria.
 
   The UI components never contain story text; they read it from here.
-  To change the mystery (names, dialogue, which clues matter), edit this file.
+  To change the mystery (names, dialogue, which notes matter), edit this file.
 
   Design rule: the player is never told the term "rogue access point"
   until the reveal at the very end.
@@ -25,38 +25,67 @@ export const cafeteriaMission = {
   ],
   startLabel: 'Enter the cafeteria',
 
+  howToPlay: 'Tap anything in the room that looks interesting. Everything you notice goes into your notes — it’s up to you to work out what matters.',
+
   /*
-    Clues the player can collect. `kind: 'threat'` shows a stronger
-    "Something’s wrong" banner instead of the normal "Clue found".
+    Notes the player collects. They are neutral observations: the game never
+    says which ones matter. Harmless things get notes too, so the player has
+    to tell real evidence apart from everyday campus life.
   */
-  clues: {
+  notes: {
+    'official-networks': {
+      text: `The café’s router has an IT sticker listing two networks: “${REAL_STUDENT}” and “${REAL_GUEST}”.`,
+    },
+    coffee: {
+      text: 'Coffee corner: an unused machine and a nearly empty box of 3-in-1 sachets.',
+    },
+    poster: {
+      text: 'Debate club poster. Its QR code opens the club’s page on the university website.',
+    },
     'maya-network': {
-      text: `Maya joined “${FAKE}” because it had full signal and no password.`,
+      text: `Maya connected to “${FAKE}”: full signal, no password.`,
     },
     'maya-login': {
-      text: 'After connecting, a pop-up page asked Maya for her university email and password. Soon after, she was logged out and saw a login from somewhere she’s never been.',
+      text: 'After Maya connected, a page asked for her university email and password. Later she was logged out, and someone signed in to her account from another country.',
     },
-    'official-networks': {
-      text: `The café’s official router only broadcasts two networks: “${REAL_STUDENT}” and “${REAL_GUEST}”.`,
+    'maya-friend': {
+      text: 'Maya’s friend Karim had the same problem. He was sitting at the corner table.',
+    },
+    laptop: {
+      text: `A student on “${REAL_STUDENT}” is using the course portal normally.`,
     },
     'hidden-device': {
-      text: 'Someone taped a small box with an antenna under a corner table, powered by a power bank. It doesn’t belong to the café.',
-      kind: 'threat',
+      text: 'Under the corner table: a small box with an antenna, taped in place and plugged into a power bank.',
     },
-    'strongest-signal': {
-      text: `On your phone, “${FAKE}” has the strongest signal in the room and no password.`,
+    car: {
+      text: 'Someone keeps revving their car in the parking lot.',
+    },
+    'late-student': {
+      text: 'A soaked student rushed in late for class.',
+    },
+    'wifi-fake': {
+      text: `Phone: “${FAKE}” — open, no password, strongest signal in the room.`,
+    },
+    'wifi-student': {
+      text: `Phone: “${REAL_STUDENT}” — needs a password, fair signal.`,
+    },
+    'wifi-guest': {
+      text: `Phone: “${REAL_GUEST}” — open, fair signal.`,
+    },
+    'wifi-hotspot': {
+      text: 'Phone: “Maya’s iPhone” — a personal hotspot.',
     },
   },
 
-  // The exit question only unlocks once these have been found.
-  requiredClues: ['maya-network', 'maya-login', 'official-networks', 'hidden-device'],
+  // The exit question only unlocks once these notes exist. The player is never told which.
+  requiredNotes: ['maya-network', 'maya-login', 'official-networks', 'hidden-device'],
 
-  // Shown one at a time by the Hint button: the first hint whose clue is still missing.
+  // Shown one at a time by the Hint button: the first hint whose note is still missing.
   hints: [
-    { clue: 'maya-network', text: 'Maya looks frustrated. Ask her what happened this morning.' },
-    { clue: 'maya-login', text: 'Maya got logged out after connecting. Ask what happened afterwards.' },
-    { clue: 'official-networks', text: 'Which networks does the café actually run? Look for its equipment near the counter.' },
-    { clue: 'hidden-device', text: 'Full signal in a crowded café is unusual. Is something nearby broadcasting? Check under the tables.' },
+    { note: 'maya-network', text: 'Maya looks frustrated. Ask her what happened this morning.' },
+    { note: 'maya-login', text: 'Maya got logged out after connecting. Ask what happened afterwards.' },
+    { note: 'official-networks', text: 'Which networks does the café actually run? Look for its equipment near the counter.' },
+    { note: 'hidden-device', text: 'Full signal in a crowded café is unusual. Is something nearby broadcasting? Check under the tables.' },
   ],
 
   /*
@@ -80,7 +109,7 @@ export const cafeteriaMission = {
               'A white box on the wall with a steady green light. A sticker from IT lists the networks it broadcasts:',
               `${REAL_STUDENT} — password from the student portal\n${REAL_GUEST} — for visitors`,
             ],
-            clue: 'official-networks',
+            note: 'official-networks',
           },
         },
         {
@@ -92,8 +121,8 @@ export const cafeteriaMission = {
             title: 'Coffee corner',
             text: [
               'A coffee machine nobody uses, and a box of 3-in-1 sachets that’s nearly empty. Half of campus runs on these.',
-              'Nothing suspicious here. Just caffeine.',
             ],
+            note: 'coffee',
           },
         },
         {
@@ -105,8 +134,8 @@ export const cafeteriaMission = {
             title: 'Club poster',
             text: [
               'A poster for the debate club’s open night. The QR code underneath points to the club’s page on the university website.',
-              'It looks like a normal poster, and the link goes where it says. Not everything is a trap.',
             ],
+            note: 'poster',
           },
         },
       ],
@@ -130,8 +159,8 @@ export const cafeteriaMission = {
             title: 'Someone’s laptop',
             text: [
               'A student is finishing an assignment on the course portal. They’re on CampusNet-Student — they typed the password from the portal this morning.',
-              'Everything here looks normal.',
             ],
+            note: 'laptop',
           },
         },
         {
@@ -145,7 +174,7 @@ export const cafeteriaMission = {
               'You crouch down. Taped under the table is a small box with a little antenna, plugged into a power bank. Its light is blinking fast.',
               'It’s not the café’s router — that one is on the wall by the counter.',
             ],
-            clue: 'hidden-device',
+            note: 'hidden-device',
           },
         },
       ],
@@ -169,8 +198,8 @@ export const cafeteriaMission = {
             title: 'The parking lot',
             text: [
               'Someone is revving their car in the parking lot. Again. The windows are shaking.',
-              'Loud, but not your problem today.',
             ],
+            note: 'car',
           },
         },
         {
@@ -182,8 +211,8 @@ export const cafeteriaMission = {
             title: 'Rushing past',
             text: [
               '“Sorry, sorry! The road was completely blocked!” A soaked student runs past you toward the stairs, umbrella still dripping.',
-              'Late for class, not a cyber threat.',
             ],
+            note: 'late-student',
           },
         },
       ],
@@ -199,31 +228,34 @@ export const cafeteriaMission = {
           id: 'which',
           prompt: 'Which Wi-Fi did you use?',
           reply: `“${FAKE}”. It had full bars and didn’t ask for a password, so I just tapped it. The normal one is always so slow in here.`,
-          clue: 'maya-network',
+          note: 'maya-network',
         },
         {
           id: 'after',
           prompt: 'What happened afterwards?',
           reply: 'A page popped up asking me to “log in with your university account” to use the Wi-Fi. I typed my email and password, it said error… and ten minutes later I got logged out and an email said someone signed in from another country.',
-          clue: 'maya-login',
+          note: 'maya-login',
         },
         {
           id: 'friend',
           prompt: 'Did this happen to anyone else?',
           reply: 'My friend Karim too. He was sitting right over there, in the corner, same network.',
+          note: 'maya-friend',
         },
       ],
       leave: 'Never mind.',
+      // Shown instead of `leave` once the player has asked something.
+      leaveAfter: 'Thanks, Maya. I’ll look into it.',
     },
   },
 
   // What the player sees on their phone's Wi-Fi screen. bars: 1–4.
-  // Tapping a network with a `clue` adds that clue.
+  // Tapping a network adds its note.
   networks: [
-    { name: FAKE, bars: 4, secured: false, detail: 'Open network. No password. Strongest signal in the room.', clue: 'strongest-signal' },
-    { name: REAL_STUDENT, bars: 2, secured: true, detail: 'Secured. Needs the password from the student portal.' },
-    { name: REAL_GUEST, bars: 2, secured: false, detail: 'Open guest network for visitors.' },
-    { name: HOTSPOT, bars: 3, secured: true, detail: 'A personal phone hotspot.' },
+    { name: FAKE, bars: 4, secured: false, detail: 'Open network. No password. Strongest signal in the room.', note: 'wifi-fake' },
+    { name: REAL_STUDENT, bars: 2, secured: true, detail: 'Secured. Needs the password from the student portal.', note: 'wifi-student' },
+    { name: REAL_GUEST, bars: 2, secured: false, detail: 'Open guest network for visitors.', note: 'wifi-guest' },
+    { name: HOTSPOT, bars: 3, secured: true, detail: 'A personal phone hotspot.', note: 'wifi-hotspot' },
   ],
 
   finalQuestion: {

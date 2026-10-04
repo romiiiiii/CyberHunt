@@ -6,14 +6,14 @@ import './CareerReveal.css';
   what they found, what it means, and which job they just did.
   Content comes from `mission.reveal` in the data file.
 */
-export default function CareerReveal({ reveal, cluesFound, totalClues, onPlayAgain }) {
+export default function CareerReveal({ reveal, notesCount, onPlayAgain }) {
   return (
     <main className="reveal">
       <section className="reveal__card reveal__card--escape">
         <p className="reveal__kicker">Mission complete</p>
         <h1 className="reveal__headline">You made it out of the cafeteria.</h1>
         <p>
-          You found {cluesFound} of {totalClues} clues — and you still have time to make it to class.
+          You noticed {notesCount} things, worked out which ones mattered, and still have time to make it to class.
         </p>
       </section>
 

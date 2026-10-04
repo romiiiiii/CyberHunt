@@ -2,10 +2,14 @@
   One clickable object inside a scene.
 
   It's drawn inside the scene's SVG, so it stays exactly on top of the object
-  at any screen size. The visible marker is small, but the invisible hit area
-  is large enough for a thumb. Works with mouse, touch and keyboard.
+  at any screen size. The hit area is large enough for a thumb.
+  Works with mouse, touch and keyboard.
+
+  The marker is hidden by default so players have to notice things
+  themselves. It appears on hover, on keyboard focus, or when the player
+  turns on highlights from the Hint menu (`highlighted`).
 */
-export default function Hotspot({ hotspot, visited, onActivate }) {
+export default function Hotspot({ hotspot, visited, highlighted, onActivate }) {
   function handleKeyDown(event) {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
@@ -13,9 +17,13 @@ export default function Hotspot({ hotspot, visited, onActivate }) {
     }
   }
 
+  let className = 'hotspot';
+  if (visited) className += ' hotspot--visited';
+  if (highlighted) className += ' hotspot--highlighted';
+
   return (
     <g
-      className={visited ? 'hotspot hotspot--visited' : 'hotspot'}
+      className={className}
       transform={`translate(${hotspot.x} ${hotspot.y})`}
       role="button"
       tabIndex={0}

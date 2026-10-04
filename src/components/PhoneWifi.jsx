@@ -15,9 +15,9 @@ function SignalBars({ bars }) {
 
 /*
   The player's own phone, showing nearby Wi-Fi networks.
-  Tapping a network shows a little more detail about it (and may add a clue).
+  Tapping a network shows a little more detail about it (and adds it to your notes).
 */
-export default function PhoneWifi({ networks, onClue, onClose }) {
+export default function PhoneWifi({ networks, onNote, onClose }) {
   const [openNetwork, setOpenNetwork] = useState(null);
 
   return (
@@ -39,7 +39,7 @@ export default function PhoneWifi({ networks, onClue, onClose }) {
                   aria-expanded={isOpen}
                   onClick={() => {
                     setOpenNetwork(isOpen ? null : network.name);
-                    onClue(network.clue);
+                    onNote(network.note);
                   }}
                 >
                   <span className="wifi__name">{network.name}</span>

@@ -120,6 +120,20 @@
   outline: none;
 }
 
+/* Hidden until hovered, focused, or highlighted from the Hint menu. */
+.hotspot__halo,
+.hotspot__ring,
+.hotspot__dot {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.hotspot:hover :is(.hotspot__ring, .hotspot__dot),
+.hotspot:focus-visible :is(.hotspot__ring, .hotspot__dot),
+.hotspot--highlighted :is(.hotspot__halo, .hotspot__ring, .hotspot__dot) {
+  opacity: 1;
+}
+
 .hotspot__hit {
   fill: transparent;
 }
@@ -140,6 +154,10 @@
   stroke-width: 1.5;
   transform-box: fill-box;
   transform-origin: center;
+}
+
+/* The pulse only runs when highlights are on (it would override the hidden state). */
+.hotspot--highlighted .hotspot__halo {
   animation: hotspot-pulse 2.2s ease-out infinite;
 }
 

@@ -34,18 +34,10 @@
 
 .toast__label {
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 1rem;
   color: var(--apricot);
 }
 
 .toast__text {
   font-size: 0.95rem;
-}
-
-.toast--threat {
-  background: var(--mystery);
-}
-
-.toast--threat .toast__label {
-  color: #ffffff;
 }
