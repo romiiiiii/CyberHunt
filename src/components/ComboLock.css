@@ -1,0 +1,63 @@
+/* The attacker's reminder, written on a strip of tape. */
+.combo__tape {
+  align-self: center;
+  padding: 0.5rem 1.1rem;
+  background: #f3e6b8;
+  border-radius: 3px;
+  font-family: 'Comic Sans MS', 'Segoe Print', cursive;
+  font-size: 1.05rem;
+  transform: rotate(-2deg);
+  box-shadow: 0 2px 0 rgba(35, 57, 47, 0.12);
+}
+
+.combo {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 18px;
+  background: #2e3b45;
+}
+
+.combo__wheel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.combo__step {
+  width: var(--tap);
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  background: #4a5863;
+  color: #f4ecdd;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.combo__digit {
+  width: 56px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #f4ecdd;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+}
+
+.combo__message {
+  padding: 0.6rem 0.8rem;
+  border-radius: 10px;
+  background: #efe8da;
+  animation: nope 0.3s ease;
+}
+
+.combo__done {
+  padding: 0.8rem 0.9rem;
+  border-radius: 12px;
+  background: #eef6ef;
+  border-left: 5px solid #3f8f5a;
+}
