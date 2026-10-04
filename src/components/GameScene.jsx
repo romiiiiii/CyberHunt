@@ -25,8 +25,11 @@ export default function GameScene({ views, viewIndex, onChangeView, illustration
     setCanSwipe(viewport.scrollWidth > viewport.clientWidth + 4);
   }, [viewIndex]);
 
+  // Wall above, floor below — split at the same height as the picture's floor.
+  const floorPercent = ((Illustration.floorY ?? 205) / 300) * 100;
+
   return (
-    <div className="scene">
+    <div className="scene" style={{ '--floor': `${floorPercent}%` }}>
       {/* The tip hides once the player touches or scrolls the scene themselves. */}
       <div
         className="scene__viewport"

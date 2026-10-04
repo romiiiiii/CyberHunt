@@ -1,0 +1,136 @@
+.locks__intro {
+  color: var(--cedar-soft);
+}
+
+.locks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.lock {
+  border-radius: 16px;
+  background: #fffaf0;
+  border: 2px solid #d9c7a6;
+  overflow: hidden;
+}
+
+.lock__header {
+  width: 100%;
+  min-height: var(--tap);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  padding: 0.8rem 0.9rem;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.lock__header:disabled {
+  cursor: default;
+}
+
+/* A little indicator light: red while locked, green when open. */
+.lock__light {
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+  margin-top: 0.3rem;
+  border-radius: 50%;
+  background: #c4473d;
+  box-shadow: 0 0 0 4px rgba(196, 71, 61, 0.18);
+}
+
+.lock--open .lock__light {
+  background: #3f8f5a;
+  box-shadow: 0 0 0 4px rgba(63, 143, 90, 0.2);
+  animation: lock-pop 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.6);
+}
+
+@keyframes lock-pop {
+  from { transform: scale(0.3); }
+}
+
+.lock--open {
+  border-color: #a9cdb3;
+  background: #eef6ef;
+}
+
+.lock__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.lock__number {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--cedar-soft);
+}
+
+.lock__question {
+  font-weight: 700;
+}
+
+.lock__solved {
+  padding: 0 0.9rem 0.8rem 2.6rem;
+  font-size: 0.92rem;
+}
+
+.lock__answers {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0 0.9rem 0.9rem;
+}
+
+.lock__option {
+  min-height: var(--tap);
+  padding: 0.55rem 0.9rem;
+  border: 2px solid #e2d5bd;
+  border-radius: 12px;
+  background: #ffffff;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.lock__option:hover {
+  border-color: var(--apricot);
+}
+
+/* Notes are longer sentences, so they use regular weight. */
+.lock__option--note {
+  font-weight: 400;
+  font-size: 0.92rem;
+}
+
+.lock__empty,
+.lock__feedback {
+  padding: 0.6rem 0.8rem;
+  border-radius: 10px;
+  background: #efe8da;
+  font-size: 0.92rem;
+}
+
+.lock__feedback {
+  animation: nope 0.3s ease;
+}
+
+.locks__device {
+  padding: 0.7rem 0.9rem;
+  border-radius: 12px;
+  background: #fbeef3;
+  border-left: 5px solid var(--mystery);
+  font-size: 0.92rem;
+}
+
+.locks__device--off {
+  background: #eef6ef;
+  border-left-color: #3f8f5a;
+}

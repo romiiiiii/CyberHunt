@@ -55,7 +55,7 @@ export const cafeteriaMission = {
       text: `A student on “${REAL_STUDENT}” is using the course portal normally.`,
     },
     'hidden-device': {
-      text: 'Under the corner table: a small box with an antenna, taped in place and plugged into a power bank.',
+      text: 'Under table 7 (the corner table): a small box with an antenna, plugged into a power bank. Its switch has a 3-digit lock. The tape says “real nets · my bars · my table”.',
     },
     car: {
       text: 'Someone keeps revving their car in the parking lot.',
@@ -64,28 +64,31 @@ export const cafeteriaMission = {
       text: 'A soaked student rushed in late for class.',
     },
     'wifi-fake': {
-      text: `Phone: “${FAKE}” — open, no password, strongest signal in the room.`,
+      text: `Phone: “${FAKE}” — open, no password, 4 of 4 signal bars.`,
     },
     'wifi-student': {
-      text: `Phone: “${REAL_STUDENT}” — needs a password, fair signal.`,
+      text: `Phone: “${REAL_STUDENT}” — needs a password, 2 of 4 bars.`,
     },
     'wifi-guest': {
-      text: `Phone: “${REAL_GUEST}” — open, fair signal.`,
+      text: `Phone: “${REAL_GUEST}” — open, 2 of 4 bars.`,
     },
     'wifi-hotspot': {
-      text: 'Phone: “Maya’s iPhone” — a personal hotspot.',
+      text: 'Phone: “Maya’s iPhone” — a personal hotspot, 3 of 4 bars.',
     },
   },
 
-  // The exit question only unlocks once these notes exist. The player is never told which.
-  requiredNotes: ['maya-network', 'maya-login', 'official-networks', 'hidden-device'],
-
-  // Shown one at a time by the Hint button: the first hint whose note is still missing.
+  /*
+    Shown one at a time by the Hint button: the first hint that isn't done yet.
+    A hint is done when its `note` has been found, or when its `step`
+    ('locks' = all exit locks open, 'device' = box switched off) is complete.
+  */
   hints: [
     { note: 'maya-network', text: 'Maya looks frustrated. Ask her what happened this morning.' },
     { note: 'maya-login', text: 'Maya got logged out after connecting. Ask what happened afterwards.' },
     { note: 'official-networks', text: 'Which networks does the café actually run? Look for its equipment near the counter.' },
-    { note: 'hidden-device', text: 'Full signal in a crowded café is unusual. Is something nearby broadcasting? Check under the tables.' },
+    { note: 'hidden-device', text: 'Full signal in a crowded café is unusual. Is something nearby broadcasting? Maya mentioned where her friend was sitting.' },
+    { step: 'locks', text: 'The exit door has three locks. Each one asks a question — answer it with what you’ve noticed. Your notes are proof.' },
+    { step: 'device', text: 'The box is still running. The tape on it is a reminder of its code: count things you’ve already seen.' },
   ],
 
   /*
@@ -171,10 +174,12 @@ export const cafeteriaMission = {
             type: 'inspect',
             title: 'Under the corner table',
             text: [
-              'You crouch down. Taped under the table is a small box with a little antenna, plugged into a power bank. Its light is blinking fast.',
-              'It’s not the café’s router — that one is on the wall by the counter.',
+              'You crouch down under table 7. Taped there is a small box with a little antenna, plugged into a power bank. Its light is blinking fast.',
+              'Its power switch is covered by a 3-digit lock. Someone wrote a reminder on the tape: “real nets · my bars · my table”.',
             ],
             note: 'hidden-device',
+            // Offers the box's combination lock (see `device` below).
+            opensDeviceLock: true,
           },
         },
       ],
@@ -185,7 +190,7 @@ export const cafeteriaMission = {
       hotspots: [
         {
           id: 'door',
-          label: 'Exit door',
+          label: 'Exit door and its lock panel',
           x: 200, y: 168,
           action: { type: 'door' },
         },
@@ -258,37 +263,61 @@ export const cafeteriaMission = {
     { name: HOTSPOT, bars: 3, secured: true, detail: 'A personal phone hotspot.', note: 'wifi-hotspot' },
   ],
 
-  finalQuestion: {
-    prompt: 'Which network is most likely behind the stolen accounts?',
-    options: [
-      {
-        id: 'fake',
-        label: FAKE,
-        correct: true,
-        feedback: 'It isn’t on the café’s router, it’s broadcast from a hidden box, it copies the real name, and it asked for passwords.',
-      },
-      {
-        id: 'student',
-        label: REAL_STUDENT,
-        feedback: 'This one is listed on the café’s official router, and students on it haven’t had problems. Look again.',
-      },
-      {
-        id: 'guest',
-        label: REAL_GUEST,
-        feedback: 'It’s open, but it’s an official network from IT. Being open alone doesn’t make it the culprit.',
-      },
-      {
-        id: 'hotspot',
-        label: HOTSPOT,
-        feedback: 'That’s just Maya’s own phone hotspot — and she didn’t connect to it.',
-      },
-    ],
+  /*
+    The exit door's three locks. The player sees all three from the start.
+    - kind 'choice': pick one of the given options.
+    - kind 'note':   pick one of YOUR notes as proof. You can only answer
+                     if you've actually found the right note.
+  */
+  exitLocks: [
+    {
+      id: 'network',
+      kind: 'choice',
+      question: 'Which network is pretending to be the campus network?',
+      options: [
+        { id: 'fake', label: FAKE, correct: true },
+        { id: 'student', label: REAL_STUDENT, feedback: 'That one is on the café router’s official list.' },
+        { id: 'guest', label: REAL_GUEST, feedback: 'That one is on the café router’s official list too. Being open doesn’t make it fake.' },
+        { id: 'hotspot', label: HOTSPOT, feedback: 'That’s just Maya’s phone, and it isn’t pretending to be anything.' },
+      ],
+      solved: `“${FAKE}” isn’t on the router’s list, but its name copies the real one.`,
+    },
+    {
+      id: 'source',
+      kind: 'note',
+      question: 'Where is that network coming from? Pick the note that proves it.',
+      answer: 'hidden-device',
+      wrong: 'That doesn’t show where the signal comes from. Something close by must be broadcasting it.',
+      solved: 'A hidden box under table 7 is broadcasting it — that’s why its signal is so strong.',
+    },
+    {
+      id: 'method',
+      kind: 'note',
+      question: 'How did it take over Maya’s account? Pick the note that proves it.',
+      answer: 'maya-login',
+      wrong: 'That doesn’t explain how her password got out. What happened right after she connected?',
+      solved: 'A fake login page asked for her university password, and someone used it.',
+    },
+  ],
+
+  /*
+    The combination lock on the hidden box's power switch.
+    The code comes from things the player has seen:
+      real nets = networks on the router's sticker (2)
+      my bars   = signal bars of the fake network on the phone (4)
+      my table  = the number on the corner table (7)
+  */
+  device: {
+    code: '247',
+    reminder: 'real nets · my bars · my table',
+    wrong: 'Click. Nothing happens — the light keeps blinking.',
+    solved: 'The light goes dark. The fake network disappears from every phone in the café.',
   },
 
   // Shown only after escaping. This is the first time the terms appear.
   reveal: {
     term: 'Rogue Access Point',
-    discovery: 'You just found a rogue access point.',
+    discovery: 'You just found — and switched off — a rogue access point.',
     explanation: [
       'A rogue access point is a wireless network device that someone set up without permission. This one copied the name of the real campus network so people would trust it — sometimes called an “evil twin”.',
       'Its fake login page collected passwords from anyone who connected. That’s why Maya’s account was taken over.',
@@ -299,7 +328,8 @@ export const cafeteriaMission = {
     duties: [
       'Know which networks and devices are supposed to exist — like the list on the café’s router.',
       'Notice when something doesn’t belong — a network or a device nobody approved.',
-      'Find it, remove it, and help people stay safe — like never typing a password into a pop-up page.',
+      'Prove what happened with evidence — like you did at the exit door. In real jobs this becomes an incident report.',
+      'Remove the threat and help people stay safe — like never typing a password into a pop-up page.',
     ],
   },
 };

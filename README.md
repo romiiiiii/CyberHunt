@@ -242,17 +242,17 @@ src/
   styles/global.css     colours, fonts and shared styles
   pages/                one file per screen (landing, campus, cafeteria mission)
   components/           reusable pieces: GameScene, Hotspot, Sheet, DialogueBox,
-                        PhoneWifi, NotesPanel, Toast, FinalQuestion, CareerReveal...
+                        PhoneWifi, NotesPanel, DoorLockPanel, ComboLock, Toast, CareerReveal...
   game/data/            game content: locations and all Mission 01 text, notes and puzzle
   game/scenes/          scene illustrations (cafeteria views are hand-drawn SVG placeholders)
   game/useMission.js    tracks notes and objects checked during a mission
 ```
 
-To change the mystery (dialogue, network names, which notes are required), edit
+To change the mystery (dialogue, network names, the door's locks, the box's code), edit
 `src/game/data/cafeteriaMission.js` — no component code needs to change.
 
 ### Current status
 
 - Landing screen → campus path → Mission 01 intro.
-- **Mission 01 is playable:** three cafeteria views (counter, seating area, exit), hidden clickable objects (some useful, many harmless), Maya's dialogue, the phone's Wi-Fi list, a neutral notebook (the game never says which notes matter), hints with optional highlighting, the final question at the exit, and the Network Security career reveal.
+- **Mission 01 is playable:** three cafeteria views (counter, seating area, exit) with hidden clickable objects (some useful, many harmless), Maya's dialogue, the phone's Wi-Fi list and a neutral notebook. To escape, the player opens **3 locks on the exit door** (answering with their notes as proof) and cracks a **3-digit code** to switch off the hidden device. Then comes the Network Security career reveal.
 - Not built yet: the corridor with mock students, the Cyber Profile, saving progress (refreshing restarts the mission), and final illustrated art (current art is placeholder SVG).

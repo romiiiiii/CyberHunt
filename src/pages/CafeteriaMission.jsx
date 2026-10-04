@@ -8,7 +8,8 @@ import DialogueBox from '../components/DialogueBox.jsx';
 import PhoneWifi from '../components/PhoneWifi.jsx';
 import NotesPanel from '../components/NotesPanel.jsx';
 import Toast from '../components/Toast.jsx';
-import FinalQuestion from '../components/FinalQuestion.jsx';
+import DoorLockPanel from '../components/DoorLockPanel.jsx';
+import ComboLock from '../components/ComboLock.jsx';
 import CareerReveal from '../components/CareerReveal.jsx';
 import { useMission } from '../game/useMission.js';
 import { cafeteriaViews } from '../game/scenes/cafeteria/index.js';
@@ -60,7 +61,7 @@ function Investigation({ onPlayAgain }) {
     } else if (action.type === 'dialogue') {
       setOverlay({ type: 'dialogue', id: action.dialogue });
     } else if (action.type === 'door') {
-      setOverlay({ type: game.readyToSolve ? 'question' : 'door-locked' });
+      setOverlay({ type: 'door' });
     }
   }
 
@@ -91,7 +92,7 @@ function Investigation({ onPlayAgain }) {
         viewIndex={viewIndex}
         onChangeView={setViewIndex}
         illustrations={cafeteriaViews}
-        viewProps={{ doorOpen }}
+        viewProps={{ doorOpen, locksOpen: game.openLocks.length, deviceOff: game.deviceOff }}
         visited={game.visited}
         highlightHotspots={highlightHotspots}
         onHotspot={handleHotspot}
@@ -114,6 +115,11 @@ function Investigation({ onPlayAgain }) {
           {overlay.hotspot.action.text.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
+          {overlay.hotspot.action.opensDeviceLock && (
+            <button className="btn" onClick={() => setOverlay({ type: 'combo' })}>
+              {game.deviceOff ? 'Check the switch' : 'Try the lock'}
+            </button>
+          )}
         </Sheet>
       )}
 
@@ -132,7 +138,7 @@ function Investigation({ onPlayAgain }) {
           <p>
             {game.nextHint
               ? game.nextHint.text
-              : 'You’ve noticed enough. Head to the exit and decide what’s going on.'}
+              : 'Everything is solved. Head to the exit door and open it.'}
           </p>
           <button className="btn btn--quiet mission__highlight" onClick={() => setHighlightHotspots(!highlightHotspots)}>
             {highlightHotspots ? 'Hide highlights' : 'Highlight things I can tap'}
@@ -140,24 +146,26 @@ function Investigation({ onPlayAgain }) {
         </Sheet>
       )}
 
-      {overlay?.type === 'door-locked' && (
-        <Sheet title="The exit" onClose={close}>
-          <p>
-            You reach for the door, then stop. If you leave now, more students will lose their
-            accounts. Work out what’s happening first.
-          </p>
-          <button className="btn btn--quiet" onClick={() => setOverlay({ type: 'hint' })}>
-            Give me a hint
-          </button>
-        </Sheet>
+      {overlay?.type === 'door' && (
+        <DoorLockPanel
+          locks={mission.exitLocks}
+          openLocks={game.openLocks}
+          allNotes={mission.notes}
+          notes={game.notes}
+          deviceOff={game.deviceOff}
+          canEscape={game.canEscape}
+          onOpenLock={game.openLock}
+          onEscape={unlockDoor}
+          onClose={close}
+        />
       )}
 
-      {overlay?.type === 'question' && (
-        <FinalQuestion
-          question={mission.finalQuestion}
-          onSolved={unlockDoor}
+      {overlay?.type === 'combo' && (
+        <ComboLock
+          device={mission.device}
+          solved={game.deviceOff}
+          onSolved={game.switchOffDevice}
           onClose={close}
-          onOpenNotes={() => setOverlay({ type: 'notes' })}
         />
       )}
 

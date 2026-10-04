@@ -3,7 +3,7 @@
   flex: 1 1 auto;
   min-height: 0;
   /* Wall above, floor below: whatever the picture doesn't cover looks like more room. */
-  background: linear-gradient(#f0dcbc 50%, #c99a6e 50%);
+  background: linear-gradient(#f0dcbc var(--floor, 68%), #c99a6e var(--floor, 68%));
 }
 
 .scene__viewport {
@@ -189,15 +189,20 @@
   animation: blink 0.7s steps(1) infinite;
 }
 
+
+.scene-light-off {
+  fill: #6b7378;
+}
+
 @keyframes blink {
   50% { opacity: 0; }
 }
 
-.scene-shake {
-  animation: shake 0.25s linear infinite;
+.scene-rattle {
+  animation: rattle 0.25s linear infinite;
 }
 
-@keyframes shake {
+@keyframes rattle {
   50% { transform: translate(0.6px, -0.4px); }
 }
 

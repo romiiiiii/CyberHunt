@@ -131,6 +131,12 @@ button {
   white-space: nowrap;
 }
 
+/* A small "no" wobble for wrong answers. */
+@keyframes nope {
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
 /* Shared by every illustrated scene. */
 /* Students bob gently, as if walking. */
 .scene-student {
