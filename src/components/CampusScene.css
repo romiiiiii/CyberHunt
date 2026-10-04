@@ -1,0 +1,52 @@
+.campus-scene {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.scene-window {
+  fill: #5d6f7a;
+}
+
+.scene-window--lit {
+  fill: #ffd98a;
+}
+
+.scene-cedar path:first-of-type {
+  fill: #2f5a45;
+}
+
+/* The suspicious window glows pink and flickers irregularly. */
+.scene-window--odd {
+  fill: #f2c4d6;
+  animation: odd-flicker 4s infinite steps(1);
+}
+
+.scene-signal path {
+  fill: none;
+  stroke: var(--mystery);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+
+.scene-signal circle {
+  fill: var(--mystery);
+}
+
+.scene-signal {
+  animation: odd-flicker 4s infinite steps(1);
+}
+
+@keyframes odd-flicker {
+  0%, 62%, 70%, 100% { opacity: 1; }
+  64%, 72% { opacity: 0.25; }
+}
+
+/* Students bob gently, as if walking. */
+.scene-student {
+  animation: bob 1.6s ease-in-out infinite;
+}
+
+@keyframes bob {
+  50% { transform: translateY(-1.5px); }
+}

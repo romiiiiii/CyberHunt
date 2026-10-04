@@ -1,0 +1,136 @@
+/*
+  Locations zig-zag down a dashed footpath (drawn by .campus__path::before).
+  Odd items sit left of the path, even items sit right.
+*/
+.location {
+  position: relative;
+  display: flex;
+  padding: 0.75rem 0;
+}
+
+.location:nth-child(even) {
+  justify-content: flex-end;
+}
+
+.location__dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border-radius: 50%;
+  background: var(--limestone);
+  border: 4px solid var(--locked);
+  z-index: 1;
+}
+
+.location--available .location__dot {
+  border-color: var(--apricot);
+  background: var(--apricot);
+  box-shadow: 0 0 0 6px rgba(242, 166, 90, 0.35);
+}
+
+.location__card {
+  position: relative;
+  z-index: 2;
+  width: 82%;
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius-card);
+  background: var(--limestone);
+  color: inherit;
+  text-decoration: none;
+}
+
+.location__icon {
+  font-size: 1.9rem;
+  line-height: 1;
+  flex: 0 0 auto;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: #e8dcc3;
+}
+
+.location__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.location__mission {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--cedar-soft);
+}
+
+.location__name {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+}
+
+.location__teaser {
+  font-size: 0.95rem;
+  color: var(--cedar-soft);
+}
+
+.location__cta {
+  margin-top: 0.6rem;
+  align-self: flex-start;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-pill);
+  background: var(--apricot);
+  font-weight: 800;
+  box-shadow: 0 4px 0 var(--apricot-deep);
+}
+
+.location__lock {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--locked);
+}
+
+/* Available: lifted card with a solid ledge. */
+.location--available .location__card {
+  box-shadow: 0 6px 0 var(--apricot-deep);
+  border: 3px solid var(--apricot);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.location--available .location__card:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--apricot-deep);
+}
+
+.location--available .location__icon {
+  background: #fde3c4;
+}
+
+/* Locked: flat and faded, like a building you can see but can't enter yet. */
+.location--locked .location__card {
+  background: #e6eadb;
+  border: 2px dashed rgba(35, 57, 47, 0.2);
+}
+
+.location--locked .location__icon {
+  filter: grayscale(1);
+  opacity: 0.55;
+}
+
+.location--locked .location__name,
+.location--locked .location__teaser {
+  opacity: 0.7;
+}
+
+@media (min-width: 640px) {
+  .location__card {
+    width: 46%;
+  }
+}

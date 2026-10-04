@@ -221,3 +221,31 @@ CyberHunt is built around one idea:
 Students learn by investigating, experimenting, making mistakes, and solving problems. The terminology comes after the experience.
 
 **Enter the campus. Escape the rooms. Discover where you fit in cybersecurity.**
+
+## Running locally
+
+You need [Node.js](https://nodejs.org/) 20 or newer.
+
+```bash
+npm install
+npm run dev
+```
+
+Then open the address Vite prints (usually http://localhost:5173). To test on your phone, run `npm run dev -- --host` and open the "Network" address on the same Wi-Fi.
+
+### Project structure
+
+```
+src/
+  main.jsx              entry point (sets up the router)
+  App.jsx               the list of screens and their URLs
+  styles/global.css     colours, fonts and shared button styles
+  pages/                one file per screen (landing, campus, cafeteria mission)
+  components/           reusable pieces (campus illustration, location card, mission header...)
+  game/data/            game content — locations and mission story text, kept out of the UI
+  game/scenes/          scene illustrations (the cafeteria is a placeholder for now)
+```
+
+### Current status
+
+Milestone 1: landing screen → campus path → Mission 01 intro → cafeteria **placeholder** scene. The investigation itself (hotspots, dialogue, clues, Wi-Fi puzzle, career reveal) is not built yet.
