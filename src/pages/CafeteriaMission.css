@@ -1,0 +1,82 @@
+/* Full-height column: header, the scene (takes all remaining space), toolbar. */
+.mission {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: #3a2f2a;
+}
+
+.mission__stage {
+  position: relative;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.mission__stage svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.mission__notice {
+  position: absolute;
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(-50%);
+  width: min(92%, 420px);
+  text-align: center;
+}
+
+.mission__toolbar {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.6rem 0.75rem calc(0.6rem + env(safe-area-inset-bottom));
+  background: rgba(244, 236, 221, 0.95);
+}
+
+.mission__tool {
+  flex: 1;
+  min-height: var(--tap);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border: none;
+  border-radius: 14px;
+  background: #e8dcc3;
+  font-weight: 800;
+  text-decoration: none;
+  color: var(--cedar);
+  cursor: pointer;
+}
+
+.mission__tool:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.mission__count {
+  min-width: 1.5rem;
+  padding: 0 0.4rem;
+  border-radius: var(--radius-pill);
+  background: var(--limestone);
+  font-size: 0.85rem;
+}
+
+.mission__tool--leave {
+  flex: 0 0 auto;
+  padding: 0 1rem;
+  background: transparent;
+  color: var(--cedar-soft);
+}
+
+@media (min-width: 820px) {
+  .mission__toolbar {
+    justify-content: center;
+  }
+
+  .mission__tool {
+    flex: 0 0 160px;
+  }
+}
