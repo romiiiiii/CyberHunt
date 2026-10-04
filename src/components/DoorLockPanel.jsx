@@ -73,7 +73,12 @@ export default function DoorLockPanel({ locks, openLocks, allNotes, notes, devic
                   )}
                   {lock.kind === 'note' &&
                     notes.map((noteId) => (
-                      <button key={noteId} className="lock__option lock__option--note" onClick={() => answer(lock, noteId === lock.answer, lock.wrong)}>
+                      <button
+                        key={noteId}
+                        className="lock__option lock__option--note"
+                        // If the right note hasn't been found yet, say so instead of just "wrong".
+                        onClick={() => answer(lock, noteId === lock.answer, notes.includes(lock.answer) ? lock.wrong : lock.missing)}
+                      >
                         {allNotes[noteId].text}
                       </button>
                     ))}
