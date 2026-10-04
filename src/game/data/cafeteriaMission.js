@@ -214,6 +214,8 @@ export const cafeteriaMission = {
         },
       ],
       leave: 'Never mind.',
+      // Shown instead of `leave` once the player has asked something.
+      leaveAfter: 'Thanks, Maya. I’ll look into it.',
     },
   },
 

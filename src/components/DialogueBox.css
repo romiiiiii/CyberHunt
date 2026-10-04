@@ -33,6 +33,7 @@
 }
 
 .dialogue__line {
+  padding-right: 2.5rem; /* room for the close button */
   font-size: 1.05rem;
   min-height: 3em;
 }
@@ -72,4 +73,25 @@
   border-style: dashed;
   background: transparent;
   color: var(--cedar-soft);
+}
+
+.dialogue__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: #e8dcc3;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* The way out, once you've got what you need. */
+.dialogue__choice--done {
+  border-color: var(--apricot-deep);
+  background: var(--apricot);
+  box-shadow: 0 4px 0 var(--apricot-deep);
 }
