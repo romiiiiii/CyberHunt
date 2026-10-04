@@ -1,111 +1,223 @@
 # CyberHunt
 
-### Escape the campus. Outsmart the threat.
+### Explore the campus. Solve the threats. Discover your path.
 
-CyberHunt is a gamified cybersecurity awareness experience designed around everyday university life. Instead of teaching cybersecurity through slides or multiple-choice quizzes, CyberHunt places students inside interactive escape-room scenarios where cyber threats are hidden in plain sight.
+CyberHunt is a gamified cybersecurity learning experience designed for university students who are curious about cybersecurity but may not know what fields such as SOC, DevOps, penetration testing, cloud security, incident response, or digital forensics actually involve.
 
-The first version is being designed for **NDU students**, with a virtual campus inspired by Notre Dame University–Louaize. Players explore familiar university spaces, investigate suspicious digital situations, find hidden threats, solve security challenges, and unlock the next area of campus.
+Instead of starting with definitions, CyberHunt lets students **experience the job first**.
+
+Players explore a virtual university campus, enter escape-room-style missions, investigate realistic security problems, and gradually discover the cybersecurity field behind each challenge.
+
+The first version is being designed around a university campus inspired by **Notre Dame University–Louaize (NDU)**, with the long-term goal of introducing NDU students to cybersecurity in a more interactive way.
 
 ## The problem
 
-University students make cybersecurity decisions every day without necessarily realizing it. Connecting to Wi-Fi, scanning QR codes, opening university emails, responding to internship offers, sharing files, logging into campus computers, and receiving messages asking for verification codes can all expose students to security risks.
+Computer science students are often introduced to many possible career paths without getting the chance to experience what those paths actually feel like.
 
-Traditional cybersecurity awareness training often explains these risks after the fact. CyberHunt takes a different approach:
+Terms such as:
 
-> **Instead of asking students if they understand cybersecurity, put them in realistic situations and see if they can spot the threat.**
+- SOC
+- Threat Intelligence
+- Incident Response
+- Penetration Testing
+- Network Security
+- Cloud Security
+- DevOps / DevSecOps
+- Digital Forensics
+- Risk & Compliance
 
-## How it works
+can sound abstract when a student has never worked in cybersecurity.
 
-Players create a small character and enter a virtual university campus. Each location acts as an escape room built around a different area of cyber awareness.
+CyberHunt reverses the usual learning process:
 
-To escape, the player must explore the environment, distinguish safe objects from actual threats, solve short security puzzles, and learn why each discovered threat is dangerous.
+> **Play first. Discover the field second.**
 
-Finding a threat earns XP and reveals a short explanation. Finding something harmless does not. The goal is not to click everything — it is to learn what deserves suspicion.
+Rather than showing a student a definition of incident response, the game gives them an incident to investigate. Rather than defining network security, it asks them to find what is wrong with a suspicious campus network.
 
-## Campus missions
+Once the mission is complete, CyberHunt reveals the real cybersecurity field behind what they just did.
 
-### ☕ Cafeteria — Public Wi-Fi & QR Safety
-The first playable mission. Hidden around the cafeteria are everyday security risks such as a rogue Wi-Fi network, a suspicious QR code, an unattended device, or another threat that might easily be ignored in real life.
+## How learning works
 
-Find the threats, solve the final challenge, and unlock the cafeteria exit.
+Every mission follows a simple cycle:
 
-### 📚 Library — Phishing & Account Security
-Investigate suspicious university emails, links, login requests, and account activity.
+**1. Enter the scenario**
 
-### 💻 Computer Lab — Device & Data Security
-Learn to recognize unsafe USB devices, exposed passwords, unlocked sessions, suspicious downloads, and poor credential practices.
+The player receives a mission in normal language without needing cybersecurity vocabulary.
 
-### 🏫 Classroom — Social Engineering
-Not every attack looks technical. Decide who and what to trust when messages appear to come from professors, classmates, or university staff.
+> "Students cannot connect to the campus network. Something strange is broadcasting nearby. Find out what is happening."
 
-### 💼 Career Center — Recruitment Scams
-Spot fake recruiters, suspicious internship offers, requests for personal information, and malicious attachments.
+**2. Investigate**
 
-### 🖥️ Final Mission — Campus Incident
-Use skills learned across the previous rooms to investigate a larger simulated security incident.
+The player explores the room, checks clues, talks to characters, and decides what is safe or suspicious.
+
+**3. Escape**
+
+Finding the important clues and solving the final security challenge unlocks the exit.
+
+**4. Reveal the field**
+
+Only after the player has experienced the problem does CyberHunt introduce the terminology:
+
+> **You just worked like a Network Security Analyst.**
+
+The game then gives a short explanation of what that field does in the real world.
+
+**5. Build a Cyber Profile**
+
+CyberHunt tracks which types of challenges the player performs well in and enjoys.
+
+By the end of the campus, students have both learned basic cyber awareness and experienced several cybersecurity career paths.
 
 ## The campus
 
-Escaping a room returns the player to a shared campus corridor/map. Other students appear as small avatars with their current progress, making CyberHunt feel like a campus-wide experience rather than an isolated training exercise.
+The university itself acts as the level map.
 
-Future versions could include friends, challenge times, weekly missions, campus leaderboards, and live awareness events.
+### ☕ Cafeteria — Network Security
 
-## Cyber Awareness Report
+A strange Wi-Fi network has appeared around the cafeteria.
 
-At the end of a run, CyberHunt gives the player a simple awareness profile instead of only a final score.
+Players investigate available networks, QR codes, connected devices, and other clues to determine what is unsafe and escape the room.
 
-Examples include:
+**After the mission:** CyberHunt introduces Network Security and explains how professionals protect networks, devices, and communications.
 
-- Phishing detection
-- Social engineering awareness
-- Link and QR safety
-- Password and authentication security
-- Device security
-- Public network awareness
+### 📚 Library — Threat Intelligence & Incident Response
 
-The goal is to show students which threats they recognize well and which ones they are most likely to miss.
+Something suspicious has happened to a student account.
 
-## Why NDU?
+Players investigate messages, login activity, timestamps, and clues to understand what happened and decide how to respond.
 
-CyberHunt is initially being designed around the environment of Notre Dame University–Louaize because cybersecurity awareness becomes more memorable when scenarios resemble places and situations students actually encounter.
+**After the mission:** the player discovers Threat Intelligence and Incident Response.
 
-The long-term idea is to pilot the experience with NDU students and explore CyberHunt as a campus cybersecurity awareness initiative. The concept could later be adapted to other universities with their own campus environments and scenarios.
+### 💻 Computer Lab — Penetration Testing & Application Security
 
-## Future idea: CyberHunt on the real campus
+A simulated application contains hidden weaknesses.
 
-CyberHunt could eventually extend beyond the screen. QR-based challenges placed around campus could unlock location-specific missions during orientation or cybersecurity awareness events.
+Players investigate the environment, discover vulnerabilities, and learn how security professionals find weaknesses before attackers do.
 
-A student sitting in the real cafeteria could scan a challenge and investigate a virtual version of the same environment.
+**After the mission:** the player is introduced to Penetration Testing and Application Security.
+
+### 🖥️ IT Office — SOC
+
+Security alerts are appearing across campus.
+
+The player must determine which alerts matter, connect clues, and identify suspicious activity.
+
+**After the mission:** CyberHunt explains what a Security Operations Center (SOC) is and what SOC analysts actually do.
+
+### ☁️ Server Room — Cloud Security & DevSecOps
+
+A deployment has been misconfigured.
+
+Players investigate permissions, exposed information, and the software delivery process to secure the system.
+
+**After the mission:** the player learns what Cloud Security and DevSecOps mean.
+
+### 🔎 Final Investigation — Digital Forensics
+
+A campus device has been compromised.
+
+Using clues collected throughout the game, the player reconstructs what happened.
+
+**After the mission:** CyberHunt introduces Digital Forensics and how investigators use digital evidence.
+
+## No previous cybersecurity knowledge required
+
+CyberHunt is designed specifically so that students **do not need to know cybersecurity terminology before playing**.
+
+Missions use ordinary language first and technical terminology second.
+
+Instead of:
+
+> "Identify the rogue access point."
+
+CyberHunt might ask:
+
+> "One of these Wi-Fi networks is pretending to belong to the university. Which one would you trust?"
+
+After the player solves it, the game can explain:
+
+> **Rogue Access Point** — an unauthorized wireless access point that can be used to imitate a trusted network.
+
+This makes terminology something the player attaches to an experience rather than something they are expected to memorize beforehand.
+
+## Cyber Profile
+
+Completing missions gradually builds a profile based on the player's performance and choices.
+
+Example:
+
+**Your Cyber Profile**
+
+1. Threat Intelligence & Incident Response — 91%
+2. Network & Cloud Security — 84%
+3. Penetration Testing — 76%
+4. SOC — 72%
+5. Risk & Compliance — 68%
+6. Digital Forensics — 61%
+
+The profile is not intended to tell students what career they must choose. It gives them a starting point for exploring fields they may enjoy.
+
+A student might finish CyberHunt thinking:
+
+> "I had never heard of incident response before, but that was my favorite mission."
+
+That is the goal.
+
+## Social campus experience
+
+After escaping a room, players return to the virtual campus or corridor.
+
+Small student avatars can represent friends and other students progressing through CyberHunt. Future versions could include challenge times, achievements, weekly missions, and campus events.
+
+The aim is to make learning cybersecurity feel like something happening around campus rather than an isolated online course.
+
+## First audience: NDU students
+
+CyberHunt is initially being designed with NDU students in mind.
+
+The virtual environment can take inspiration from familiar university spaces while the challenges reflect digital situations students encounter in everyday life.
+
+The long-term goal is to explore CyberHunt as both:
+
+- a cybersecurity awareness experience for students
+- an interactive introduction to cybersecurity career paths
+
+The concept could later be adapted for other universities.
 
 ## MVP
 
-The first prototype intentionally focuses on **one polished escape room rather than an entire campus**.
+The first prototype will focus on **one polished playable escape room** rather than attempting to build the entire campus at once.
 
-**Mission 01: Escape the Cafeteria**
+### Mission 01 — Escape the Cafeteria
 
 The MVP will include:
 
-- A small NDU-inspired interactive environment
-- Hidden safe and unsafe objects
-- Cyber threat discovery
-- Short explanations after each discovery
+- A small university-inspired interactive environment
+- A clear security mystery
+- Safe objects and hidden threats
+- Investigation and escape-room mechanics
+- Short explanations when important concepts are discovered
 - XP / scoring
-- An escape objective
-- A final security challenge
-- A corridor showing future locked campus locations
-- Mock student avatars to demonstrate the future social experience
+- A final challenge that unlocks the exit
+- A post-mission career reveal
+- A corridor teasing future cybersecurity tracks
+- Small mock student avatars to demonstrate the future social experience
 
 ## Planned tech stack
 
 - **Frontend:** React
 - **Game/UI:** JavaScript, HTML, CSS
 - **Version Control:** Git & GitHub
-- **Later:** backend/database for accounts, progress, scores, and campus analytics
+- **Later:** backend/database for accounts, progress, scores, profiles, and campus analytics
 
 The stack may evolve as the prototype develops.
 
 ## Vision
 
-CyberHunt is meant to make cybersecurity awareness feel less like mandatory training and more like discovering something hidden in the world around you.
+CyberHunt is built around one idea:
 
-**Find the threat. Learn why it matters. Escape.**
+> **You should not have to understand cybersecurity jargon before you can discover that you enjoy cybersecurity.**
+
+Students learn by investigating, experimenting, making mistakes, and solving problems. The terminology comes after the experience.
+
+**Enter the campus. Escape the rooms. Discover where you fit in cybersecurity.**
