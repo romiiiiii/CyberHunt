@@ -16,6 +16,8 @@ export default function MissionIntro({ mission, onStart }) {
           ))}
         </div>
 
+        {mission.howToPlay && <p className="intro__how">{mission.howToPlay}</p>}
+
         <div className="intro__actions">
           <button className="btn" onClick={onStart}>
             {mission.startLabel}

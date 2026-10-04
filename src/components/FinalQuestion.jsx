@@ -5,9 +5,9 @@ import './FinalQuestion.css';
 /*
   The question that unlocks the exit.
   A wrong answer explains why it's wrong and lets the player try again;
-  the goal is reasoning from clues, not punishing guesses.
+  the goal is reasoning from notes, not punishing guesses.
 */
-export default function FinalQuestion({ question, onSolved, onClose, onOpenClues }) {
+export default function FinalQuestion({ question, onSolved, onClose, onOpenNotes }) {
   const [picked, setPicked] = useState(null);
   const pickedOption = question.options.find((option) => option.id === picked);
   const solved = pickedOption?.correct;
@@ -45,8 +45,8 @@ export default function FinalQuestion({ question, onSolved, onClose, onOpenClues
           Unlock the door
         </button>
       ) : (
-        <button className="btn btn--quiet question__review" onClick={onOpenClues}>
-          Review my clues
+        <button className="btn btn--quiet question__review" onClick={onOpenNotes}>
+          Review my notes
         </button>
       )}
     </Sheet>

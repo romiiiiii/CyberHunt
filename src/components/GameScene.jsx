@@ -9,7 +9,7 @@ import './GameScene.css';
   than the screen, so the player swipes sideways to look around — like
   turning their head in the room. On a wide screen it fits with space around it.
 */
-export default function GameScene({ views, viewIndex, onChangeView, illustrations, viewProps, visited, onHotspot }) {
+export default function GameScene({ views, viewIndex, onChangeView, illustrations, viewProps, visited, highlightHotspots, onHotspot }) {
   const view = views[viewIndex];
   const Illustration = illustrations[view.id];
   const previous = views[viewIndex - 1];
@@ -41,6 +41,7 @@ export default function GameScene({ views, viewIndex, onChangeView, illustration
               key={hotspot.id}
               hotspot={hotspot}
               visited={visited.includes(hotspot.id)}
+              highlighted={highlightHotspots}
               onActivate={onHotspot}
             />
           ))}

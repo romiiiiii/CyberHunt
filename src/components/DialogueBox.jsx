@@ -4,10 +4,10 @@ import './DialogueBox.css';
 /*
   Visual-novel style conversation.
   The character says a line; the player picks a question. Some answers
-  reveal clues (reported through onClue). Asked questions stay available
+  add notes (reported through onNote). Asked questions stay available
   but are marked, so the player can re-read them.
 */
-export default function DialogueBox({ dialogue, onClue, onClose }) {
+export default function DialogueBox({ dialogue, onNote, onClose }) {
   const [line, setLine] = useState(dialogue.opening);
   const [asked, setAsked] = useState([]);
 
@@ -27,7 +27,7 @@ export default function DialogueBox({ dialogue, onClue, onClose }) {
   function choose(choice) {
     setLine(choice.reply);
     if (!asked.includes(choice.id)) setAsked([...asked, choice.id]);
-    onClue(choice.clue);
+    onNote(choice.note);
   }
 
   return (

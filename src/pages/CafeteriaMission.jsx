@@ -6,7 +6,7 @@ import GameScene from '../components/GameScene.jsx';
 import Sheet from '../components/Sheet.jsx';
 import DialogueBox from '../components/DialogueBox.jsx';
 import PhoneWifi from '../components/PhoneWifi.jsx';
-import CluePanel from '../components/CluePanel.jsx';
+import NotesPanel from '../components/NotesPanel.jsx';
 import Toast from '../components/Toast.jsx';
 import FinalQuestion from '../components/FinalQuestion.jsx';
 import CareerReveal from '../components/CareerReveal.jsx';
@@ -38,6 +38,8 @@ function Investigation({ onPlayAgain }) {
   const [overlay, setOverlay] = useState(null);
   const [doorOpen, setDoorOpen] = useState(false);
   const [complete, setComplete] = useState(false);
+  // Clickable spots are hidden until the player asks for help in the Hint menu.
+  const [highlightHotspots, setHighlightHotspots] = useState(false);
 
   // After the door opens, wait a moment so the player sees it, then show the reveal.
   useEffect(() => {
@@ -54,7 +56,7 @@ function Investigation({ onPlayAgain }) {
 
     if (action.type === 'inspect') {
       setOverlay({ type: 'inspect', hotspot });
-      game.findClue(action.clue);
+      game.addNote(action.note);
     } else if (action.type === 'dialogue') {
       setOverlay({ type: 'dialogue', id: action.dialogue });
     } else if (action.type === 'door') {
@@ -72,8 +74,7 @@ function Investigation({ onPlayAgain }) {
     return (
       <CareerReveal
         reveal={mission.reveal}
-        cluesFound={game.foundClues.length}
-        totalClues={Object.keys(mission.clues).length}
+        notesCount={game.notes.length}
         onPlayAgain={onPlayAgain}
       />
     );
@@ -81,7 +82,7 @@ function Investigation({ onPlayAgain }) {
 
   return (
     <main className="mission">
-      <MissionHeader number={mission.number} title={mission.title} cluesFound={game.foundClues.length}>
+      <MissionHeader number={mission.number} title={mission.title} notesCount={game.notes.length}>
         <Link to="/campus" className="mission__leave">Leave</Link>
       </MissionHeader>
 
@@ -92,12 +93,13 @@ function Investigation({ onPlayAgain }) {
         illustrations={cafeteriaViews}
         viewProps={{ doorOpen }}
         visited={game.visited}
+        highlightHotspots={highlightHotspots}
         onHotspot={handleHotspot}
       />
 
       <nav className="mission__toolbar" aria-label="Mission tools">
-        <button className="mission__tool" onClick={() => setOverlay({ type: 'clues' })}>
-          Clues <span className="mission__count">{game.foundClues.length}</span>
+        <button className="mission__tool" onClick={() => setOverlay({ type: 'notes' })}>
+          Notes <span className="mission__count">{game.notes.length}</span>
         </button>
         <button className="mission__tool" onClick={() => setOverlay({ type: 'phone' })}>
           Phone
@@ -116,19 +118,13 @@ function Investigation({ onPlayAgain }) {
       )}
 
       {overlay?.type === 'dialogue' && (
-        <DialogueBox dialogue={mission.dialogues[overlay.id]} onClue={game.findClue} onClose={close} />
+        <DialogueBox dialogue={mission.dialogues[overlay.id]} onNote={game.addNote} onClose={close} />
       )}
 
-      {overlay?.type === 'phone' && <PhoneWifi networks={mission.networks} onClue={game.findClue} onClose={close} />}
+      {overlay?.type === 'phone' && <PhoneWifi networks={mission.networks} onNote={game.addNote} onClose={close} />}
 
-      {overlay?.type === 'clues' && (
-        <CluePanel
-          clues={mission.clues}
-          foundClues={game.foundClues}
-          requiredCount={mission.requiredClues.length}
-          requiredFound={game.requiredFound}
-          onClose={close}
-        />
+      {overlay?.type === 'notes' && (
+        <NotesPanel allNotes={mission.notes} notes={game.notes} onClose={close} />
       )}
 
       {overlay?.type === 'hint' && (
@@ -136,8 +132,11 @@ function Investigation({ onPlayAgain }) {
           <p>
             {game.nextHint
               ? game.nextHint.text
-              : 'You have enough evidence. Head to the exit and decide what’s going on.'}
+              : 'You’ve noticed enough. Head to the exit and decide what’s going on.'}
           </p>
+          <button className="btn btn--quiet mission__highlight" onClick={() => setHighlightHotspots(!highlightHotspots)}>
+            {highlightHotspots ? 'Hide highlights' : 'Highlight things I can tap'}
+          </button>
         </Sheet>
       )}
 
@@ -146,9 +145,6 @@ function Investigation({ onPlayAgain }) {
           <p>
             You reach for the door, then stop. If you leave now, more students will lose their
             accounts. Work out what’s happening first.
-          </p>
-          <p className="mission__evidence">
-            Key evidence: {game.requiredFound} of {mission.requiredClues.length}
           </p>
           <button className="btn btn--quiet" onClick={() => setOverlay({ type: 'hint' })}>
             Give me a hint
@@ -161,7 +157,7 @@ function Investigation({ onPlayAgain }) {
           question={mission.finalQuestion}
           onSolved={unlockDoor}
           onClose={close}
-          onOpenClues={() => setOverlay({ type: 'clues' })}
+          onOpenNotes={() => setOverlay({ type: 'notes' })}
         />
       )}
 

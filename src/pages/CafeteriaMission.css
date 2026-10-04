@@ -46,12 +46,8 @@
   font-size: 0.85rem;
 }
 
-.mission__evidence {
+.mission__highlight {
   align-self: flex-start;
-  padding: 0.3rem 0.8rem;
-  border-radius: var(--radius-pill);
-  background: #e8dcc3;
-  font-weight: 800;
 }
 
 /* Big moment when the exit opens. */

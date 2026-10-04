@@ -3,7 +3,7 @@ import './Sheet.css';
 
 /*
   A panel that slides up from the bottom (centered on desktop).
-  Used for inspecting objects, the clue list, the phone and the final question.
+  Used for inspecting objects, your notes, the phone and the final question.
   Closes with the close button, by tapping outside, or with Escape.
 */
 export default function Sheet({ title, onClose, children }) {
